@@ -1,0 +1,23 @@
+{
+  "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
+  "name": "hasdata-web-scraping-mcp",
+  "version": "1.0.0",
+  "description": "Web Scraping MCP server for Cursor. Fetch any public web page with optional JavaScript rendering, wait conditions and CSS or AI extraction rules, returned as markdown, text, HTML or JSON. Remote MCP server hosted by HasData, connects over streamable HTTP with your HasData API key.",
+  "author": {
+    "name": "HasData",
+    "url": "https://hasdata.com"
+  },
+  "homepage": "https://hasdata.com/web-scraping-api",
+  "repository": "https://github.com/HasData/web-scraping-mcp",
+  "license": "MIT",
+  "keywords": [
+    "mcp",
+    "web-scraping",
+    "scraper",
+    "proxy",
+    "headless-browser",
+    "html-to-markdown",
+    "model-context-protocol",
+    "hasdata"
+  ]
+}
