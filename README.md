@@ -165,6 +165,10 @@ One call answers each of these. What changes between them is how much of the bro
 
 ## Tools
 
+| Tool | Credits | What it returns |
+| :--- | :--- | :--- |
+| `hasdata_web_scraping_web_scraping_scrapeWebPage` | 1, or 10 with JS rendering | HTML, text, markdown, and/or JSON along with status code, extracted emails and links, CSS-selector extractions, and AI-structured fields per schema |
+
 One tool. The cost depends on what you turn on, and the table is in [Pricing](#pricing-free-tier-and-limits).
 
 ### Scrape web page
