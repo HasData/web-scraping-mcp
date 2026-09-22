@@ -90,8 +90,19 @@ async function rpc(method, params = {}) {
             await new Promise((r) => setTimeout(r, attempt * 4000));
             continue;
         }
+        // The two live checks fetch a third-party page through a proxy, and that hop fails on its
+        // own schedule. An errorType of proxyConnection says the target never loaded, which tells
+        // us nothing about the output-format contract, so retry it the same way.
+        if (proxyFailed(raw) && attempt < 3) {
+            await new Promise((r) => setTimeout(r, attempt * 3000));
+            continue;
+        }
         return { raw, body: parseRpc(raw, id) };
     }
+}
+
+function proxyFailed(raw) {
+    return raw.includes('proxyConnection') || raw.includes('proxy connection to the target failed');
 }
 
 function payloadOf(body) {
@@ -147,11 +158,14 @@ test('the parameters the README documents are still in the schema', live, async 
 
 // The README says a single non-json format arrives as a string at the top level. That is the
 // first thing a reader relies on, and no schema check can see it.
-test('a single markdown request still returns the page as top-level text', live, async () => {
+test('a single markdown request still returns the page as top-level text', live, async (t) => {
     const { raw, body } = await rpc('tools/call', {
         name: TOOL,
         arguments: { url: 'https://example.com', outputFormat: ['markdown'], jsRendering: false },
     });
+    // A proxy that never reached the target proves nothing either way, so this is a skip and
+    // not a failure. A contract change would surface as a wrong shape, not as a dead fetch.
+    if (proxyFailed(raw)) return t.skip('the proxy could not load the target page');
     assert.ok(!raw.includes('401 Unauthorized'), 'HasData rejected the key');
     assert.ok(!raw.includes('"isError":true'), `the tool call failed: ${raw.slice(0, 300)}`);
 
@@ -164,7 +178,7 @@ test('a single markdown request still returns the page as top-level text', live,
 
 // And the README says that asking for json moves everything inside it, with extractRules landing
 // in extractedData. That is the shape every structured-extraction prompt depends on.
-test('a json request still puts extractRules output in extractedData', live, async () => {
+test('a json request still puts extractRules output in extractedData', live, async (t) => {
     const { raw, body } = await rpc('tools/call', {
         name: TOOL,
         arguments: {
@@ -174,6 +188,9 @@ test('a json request still puts extractRules output in extractedData', live, asy
             extractRules: { heading: 'h1' },
         },
     });
+    // A proxy that never reached the target proves nothing either way, so this is a skip and
+    // not a failure. A contract change would surface as a wrong shape, not as a dead fetch.
+    if (proxyFailed(raw)) return t.skip('the proxy could not load the target page');
     assert.ok(!raw.includes('401 Unauthorized'), 'HasData rejected the key');
     assert.ok(!raw.includes('"isError":true'), `the tool call failed: ${raw.slice(0, 300)}`);
 
