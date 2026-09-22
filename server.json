@@ -3,7 +3,7 @@
   "name": "com.hasdata/web-scraping",
   "title": "HasData Web Scraping",
   "description": "Fetch any public web page through managed proxies, with optional JS rendering and extraction rules.",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "websiteUrl": "https://hasdata.com/web-scraping-api",
   "repository": {
     "url": "https://github.com/HasData/web-scraping-mcp",
@@ -27,7 +27,7 @@
     {
       "registryType": "npm",
       "identifier": "@hasdata/web-scraping-mcp",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "transport": {
         "type": "stdio"
       },
@@ -43,7 +43,7 @@
     {
       "registryType": "pypi",
       "identifier": "hasdata-web-scraping-mcp",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "runtimeHint": "uvx",
       "transport": {
         "type": "stdio"
