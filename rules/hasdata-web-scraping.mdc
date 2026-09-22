@@ -1,0 +1,42 @@
+---
+description: How to scrape an arbitrary web page, render JavaScript and extract fields through the HasData MCP server
+alwaysApply: false
+---
+
+# Web Scraping through HasData
+
+One tool, `hasdata_web_scraping_web_scraping_scrapeWebPage`. Only `url` is required. A bare call returns `content`, `headers`, `statusCode` and `cookies`.
+
+## Rendering is on by default, and it is the expensive mode
+
+`content` is the DOM after the page's scripts have run, because `jsRendering` defaults to true. That is why a bare call works on a single-page app, and it is also the costliest way to fetch.
+
+`jsRendering: false` drops the cost to a fraction and returns the server's HTML. Fetch static first and turn rendering on when the body comes back a shell. A residential `proxyType` multiplies the price again, so reach for it after a datacenter fetch fails rather than before.
+
+## A blocked page is a successful call
+
+A target that answers 404 or 403 bills as a success. `requestMetadata.status` reads `ok`, `statusCode` carries the real code, `requestMetadata.warning` names it, and `content` is an empty string. Read `statusCode` before you conclude that a selector missed, because a bot block and a bad selector look identical downstream.
+
+A host that cannot be reached at all is the other case, and that one fails with a 400, `requestMetadata.status` of `error` and an `errorType` of `proxyConnection`.
+
+## `outputFormat` moves the body
+
+`outputFormat` takes an array of `html`, `text`, `markdown` and `json`. Ask for more than one and each arrives under its own key, except `html`, which stays in `content`.
+
+Ask for exactly one non-json format and the body arrives as the envelope's `text` while the parsed `json` is empty, so code that always reaches for `.json` finds nothing and reports a blank page. Keep `json` in the array whenever you also want `extractedData`, `links` or `emails`, because those live inside that object.
+
+## Extracting rather than parsing
+
+`extractRules` maps your field names to CSS selectors, and an attribute is addressed with `@`, as in `{ "title": "h1", "href": "a @href" }`. Results come back under `extractedData`, and a selector that matched nothing returns the key with a null rather than dropping it.
+
+`aiExtractRules` is a different shape. It takes a typed field spec, where each key names an output field with a type from `string`, `number`, `boolean`, `list` and `item`, so sending CSS selectors there does nothing.
+
+`extractLinks` and `extractEmails` add `links` and `emails`. `includeOnlyTags` and `excludeTags` trim by selector, and an invalid selector there narrows nothing instead of failing, so a suspiciously complete response is the symptom.
+
+## Interacting with the page
+
+`waitFor` takes a selector and is steadier than `wait` with a fixed delay. `jsScenario` is the only way to act on the page, with steps for click, scroll, fill, waitFor, waitForAndClick and evaluate, which is what a cookie wall or a load-more button needs.
+
+`proxyCountry` is a closed list of US, UK, DE, IE, FR, IT, SE, BR, CA, JP, SG, IN and ID, and anything else is a rejected call.
+
+Concurrency is capped by plan, so a loop over many URLs meets a 429 before anything else. Back off and retry rather than widening the loop.
