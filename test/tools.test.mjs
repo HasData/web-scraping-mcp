@@ -14,7 +14,7 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 
-const ENDPOINT = 'https://mcp.hasdata.com/api/mcp?apis=web_scraping';
+const ENDPOINT = 'https://mcp.hasdata.com/mcp?apis=web_scraping';
 const KEY = process.env.HASDATA_API_KEY;
 const TIMEOUT_MS = 45_000;
 

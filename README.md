@@ -9,12 +9,12 @@ This is the fallback for sites with no dedicated API. When a site does have one 
 **1,000 free credits every month, no card required.** A plain fetch costs 1 credit, so the free tier covers 1,000 of them.
 
 ```
-https://mcp.hasdata.com/api/mcp?apis=web_scraping
+https://mcp.hasdata.com/mcp?apis=web_scraping
 ```
 
 [![Glama score](https://glama.ai/mcp/servers/HasData/web-scraping-mcp/badges/score.svg)](https://glama.ai/mcp/servers/HasData/web-scraping-mcp)
 [![tool contract](https://github.com/HasData/web-scraping-mcp/actions/workflows/contract.yml/badge.svg)](https://github.com/HasData/web-scraping-mcp/actions/workflows/contract.yml)
-[![MCP](https://img.shields.io/badge/MCP-remote%20%7C%20streamable%20HTTP-6366f1?style=flat-square)](https://mcp.hasdata.com/api/mcp?apis=web_scraping)
+[![MCP](https://img.shields.io/badge/MCP-remote%20%7C%20streamable%20HTTP-6366f1?style=flat-square)](https://mcp.hasdata.com/mcp?apis=web_scraping)
 [![Tools](https://img.shields.io/badge/tools-1-10b981?style=flat-square)](#tools)
 [![npm](https://img.shields.io/npm/v/@hasdata/web-scraping-mcp?style=flat-square&logo=npm&label=npm&color=cb3837)](https://www.npmjs.com/package/@hasdata/web-scraping-mcp)
 [![PyPI](https://img.shields.io/pypi/v/hasdata-web-scraping-mcp?style=flat-square&logo=pypi&logoColor=white&label=PyPI&color=3775a9)](https://pypi.org/project/hasdata-web-scraping-mcp/)
@@ -46,7 +46,7 @@ The server URL is the same for every client. We run it hands-on in Claude Code a
 
 | Field | Value |
 | :--- | :--- |
-| URL | `https://mcp.hasdata.com/api/mcp?apis=web_scraping` |
+| URL | `https://mcp.hasdata.com/mcp?apis=web_scraping` |
 | Transport | HTTP, streamable |
 | Auth header | `x-api-key: HASDATA_API_KEY` |
 
@@ -56,7 +56,7 @@ Clients with OAuth support can add the same URL as a connector and sign in witho
 <summary><b>Claude Code</b></summary>
 
 ```bash
-claude mcp add --transport http web-scraping "https://mcp.hasdata.com/api/mcp?apis=web_scraping" \
+claude mcp add --transport http web-scraping "https://mcp.hasdata.com/mcp?apis=web_scraping" \
   --header "x-api-key: HASDATA_API_KEY"
 ```
 
@@ -65,7 +65,7 @@ claude mcp add --transport http web-scraping "https://mcp.hasdata.com/api/mcp?ap
 <details>
 <summary><b>Claude Desktop</b></summary>
 
-Settings, then Connectors, then Add custom connector, then paste `https://mcp.hasdata.com/api/mcp?apis=web_scraping` and sign in.
+Settings, then Connectors, then Add custom connector, then paste `https://mcp.hasdata.com/mcp?apis=web_scraping` and sign in.
 
 For the config-file route, Claude Desktop loads only local (stdio) servers, so it reaches a remote server through a stdio launcher. The `@hasdata/web-scraping-mcp` package is that launcher, and it reads the key from the environment. Add this to `claude_desktop_config.json`:
 
@@ -106,7 +106,7 @@ For Python instead of Node, swap the launcher for the PyPI package, which `uvx` 
 {
   "mcpServers": {
     "web-scraping": {
-      "url": "https://mcp.hasdata.com/api/mcp?apis=web_scraping",
+      "url": "https://mcp.hasdata.com/mcp?apis=web_scraping",
       "headers": { "x-api-key": "HASDATA_API_KEY" }
     }
   }
@@ -124,7 +124,7 @@ For Python instead of Node, swap the launcher for the PyPI package, which `uvx` 
 {
   "mcpServers": {
     "web-scraping": {
-      "serverUrl": "https://mcp.hasdata.com/api/mcp?apis=web_scraping",
+      "serverUrl": "https://mcp.hasdata.com/mcp?apis=web_scraping",
       "headers": { "x-api-key": "HASDATA_API_KEY" }
     }
   }
@@ -143,7 +143,7 @@ For Python instead of Node, swap the launcher for the PyPI package, which `uvx` 
   "servers": {
     "web-scraping": {
       "type": "http",
-      "url": "https://mcp.hasdata.com/api/mcp?apis=web_scraping",
+      "url": "https://mcp.hasdata.com/mcp?apis=web_scraping",
       "headers": { "x-api-key": "HASDATA_API_KEY" }
     }
   }
