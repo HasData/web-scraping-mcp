@@ -275,9 +275,9 @@ Rendering is on by default, so an unconfigured call costs 10. A static page fetc
 
 The free tier is **1,000 credits every month with no card**. That is 1,000 plain fetches, or 100 rendered ones. It renews with the billing cycle.
 
-Paid plans start at **$49 a month** for 200,000 credits, which is 200,000 plain fetches or 20,000 rendered ones. The unit price falls with volume across the [high-volume plans](https://hasdata.com/prices?utm_source=github&utm_medium=syndication&utm_campaign=web-scraping-mcp).
+Paid plans start at **$59 a month** for 200,000 credits, which is 200,000 plain fetches or 20,000 rendered ones. The unit price falls with volume across the [high-volume plans](https://hasdata.com/prices?utm_source=github&utm_medium=syndication&utm_campaign=web-scraping-mcp).
 
-Your plan also sets concurrency. The free tier allows 1 request at a time, Startup 15, Business 30, Growth 50, and the high-volume plans run from 200 to 1,500. Retry on the 429 with a backoff in anything unattended, because an agent crawling a list of URLs will reach the ceiling before you do.
+Your plan also sets concurrency. The free tier allows 1 request at a time, Startup 5, Basic 15, and the Growth tiers run from 50 to 500. Retry on the 429 with a backoff in anything unattended, because an agent crawling a list of URLs will reach the ceiling before you do.
 
 Credits come off successful requests only. A page that answers 404 is still a successful fetch of a 404.
 
