@@ -161,7 +161,7 @@ test('the parameters the README documents are still in the schema', live, async 
 test('a single markdown request still returns the page as top-level text', live, async (t) => {
     const { raw, body } = await rpc('tools/call', {
         name: TOOL,
-        arguments: { url: 'https://example.com', outputFormat: ['markdown'], jsRendering: false },
+        arguments: { url: 'https://hasdata.com/', outputFormat: ['markdown'], jsRendering: false },
     });
     // A proxy that never reached the target proves nothing either way, so this is a skip and
     // not a failure. A contract change would surface as a wrong shape, not as a dead fetch.
@@ -182,10 +182,12 @@ test('a json request still puts extractRules output in extractedData', live, asy
     const { raw, body } = await rpc('tools/call', {
         name: TOOL,
         arguments: {
-            url: 'https://example.com',
+            // example.com dropped its h1 and now asks not to be used for testing, so this
+            // points at a page we control and selects title, which every page has.
+            url: 'https://hasdata.com/',
             outputFormat: ['json'],
             jsRendering: false,
-            extractRules: { heading: 'h1' },
+            extractRules: { pageTitle: 'title' },
         },
     });
     // A proxy that never reached the target proves nothing either way, so this is a skip and
@@ -202,7 +204,7 @@ test('a json request still puts extractRules output in extractedData', live, asy
         `extractRules produced no extractedData: ${JSON.stringify(payload.json).slice(0, 300)}`
     );
     assert.ok(
-        payload.json.extractedData.heading,
-        `the heading selector matched nothing: ${JSON.stringify(payload.json.extractedData).slice(0, 200)}`
+        payload.json.extractedData.pageTitle,
+        `the title selector matched nothing: ${JSON.stringify(payload.json.extractedData).slice(0, 200)}`
     );
 });
