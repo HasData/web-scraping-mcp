@@ -16,6 +16,7 @@ https://mcp.hasdata.com/mcp?apis=web_scraping
 [![tool contract](https://github.com/HasData/web-scraping-mcp/actions/workflows/contract.yml/badge.svg)](https://github.com/HasData/web-scraping-mcp/actions/workflows/contract.yml)
 [![MCP](https://img.shields.io/badge/MCP-remote%20%7C%20streamable%20HTTP-6366f1?style=flat-square)](https://mcp.hasdata.com/mcp?apis=web_scraping)
 [![Tools](https://img.shields.io/badge/tools-1-10b981?style=flat-square)](#tools)
+- [Prompts and resources](#prompts-and-resources)
 [![npm](https://img.shields.io/npm/v/@hasdata/web-scraping-mcp?style=flat-square&logo=npm&label=npm&color=cb3837)](https://www.npmjs.com/package/@hasdata/web-scraping-mcp)
 [![PyPI](https://img.shields.io/pypi/v/hasdata-web-scraping-mcp?style=flat-square&logo=pypi&logoColor=white&label=PyPI&color=3775a9)](https://pypi.org/project/hasdata-web-scraping-mcp/)
 [![License](https://img.shields.io/badge/license-MIT-blue?style=flat-square)](LICENSE)
@@ -209,6 +210,23 @@ Fetch one URL.
 `jsScenario` is an array of actions run in order, covering `click`, `wait`, `waitFor`, `waitForAndClick`, `scrollX`, `scrollY`, `fill` and `evaluate` for arbitrary JavaScript. It needs `jsRendering` on.
 
 `aiExtractRules` describes the shape you want and lets a model fill it from the HTML. Each key is an output field, typed as `string`, `number`, `boolean`, `list` or `item` for a nested object.
+
+## Prompts and resources
+
+The server ships one prompt, a ready-made workflow a client can offer instead of making the user compose a tool call.
+
+| Prompt | What it does |
+| --- | --- |
+| `scrape_web_page` | Fetch any public web page and summarize its content. |
+
+Alongside them the server exposes 2 resources, one per parameter whose accepted values are a fixed list. Reading one is cheaper than learning the vocabulary from a rejected call, and it costs no credits. Each URI is `hasdata://web_scraping/<parameter>`.
+
+| Parameter | Values | What it selects |
+| --- | ---: | --- |
+| `proxyType` | 2 | Type of proxy to use. |
+| `proxyCountry` | 13 | Optional proxy country code. |
+
+Both lists are served without an API key, so a client can read them before a user has signed up.
 
 ## Output formats
 
