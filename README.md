@@ -2,7 +2,7 @@
 
 <!-- mcp-name: com.hasdata/web-scraping -->
 
-A hosted Model Context Protocol (MCP) server that gives Claude, Cursor, Windsurf and any other MCP client one read-only tool for fetching any public web page. It goes out through managed proxies, renders JavaScript when a page needs it, and returns clean markdown, plain text, raw HTML or structured JSON, with nothing to host and no browser in your stack.
+A hosted [Web Scraping MCP server](https://hasdata.com/mcp/web-scraping?utm_source=github&utm_medium=syndication&utm_campaign=web-scraping-mcp&utm_content=readme-intro) that gives Claude, Cursor, Windsurf and any other MCP client one read-only tool for fetching any public web page. It goes out through managed proxies, renders JavaScript when a page needs it, and returns clean markdown, plain text, raw HTML or structured JSON, with nothing to host and no browser in your stack.
 
 This is the fallback for sites with no dedicated API. When a site does have one in the [HasData catalogue](https://docs.hasdata.com/mcp-server?utm_source=github&utm_medium=syndication&utm_campaign=web-scraping-mcp), that tool returns parsed fields and this one returns a page.
 
@@ -295,7 +295,7 @@ The free tier is **1,000 credits every month with no card**. That is 1,000 plain
 
 Paid plans start at **$59 a month** for 200,000 credits, which is 200,000 plain fetches or 20,000 rendered ones. The unit price falls with volume across the [high-volume plans](https://hasdata.com/prices?utm_source=github&utm_medium=syndication&utm_campaign=web-scraping-mcp).
 
-Your plan also sets concurrency. The free tier allows 1 request at a time, Startup 5, Basic 15, and the Growth tiers run from 50 to 500. Retry on the 429 with a backoff in anything unattended, because an agent crawling a list of URLs will reach the ceiling before you do.
+Your plan also sets concurrency. The free tier allows 5 requests at a time, Startup 5, Basic 15, and the Growth tiers run from 50 to 500. Retry on the 429 with a backoff in anything unattended, because an agent crawling a list of URLs will reach the ceiling before you do.
 
 Credits come off successful requests only. A page that answers 404 is still a successful fetch of a 404.
 
